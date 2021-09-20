@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="KoikatsuVoiceManager.VoiceListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KoikatsuVoiceManager"
+             mc:Ignorable="d" 
+             Width="Auto" Height="Auto"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <Label Content="id:"/>
+            <TextBox x:Name="ui_FilterID" Width="40" VerticalAlignment="Center" Margin="4"/>
+            <CheckBox x:Name="ui_FilterUnref" Content="Not referenced" VerticalAlignment="Center" Margin="4"/>
+            <Button x:Name="Filter" Content="Filter"  VerticalAlignment="Center" Margin="4" Click="Filter_Click"/>
+        </StackPanel>
+        <DataGrid x:Name="ui_VoiceListDG" IsReadOnly="True" ClipboardCopyMode="ExcludeHeader"
+            AutoGenerateColumns="False" HeadersVisibility="Column" VerticalScrollBarVisibility="Auto" CanUserSortColumns="True" CopyingRowClipboardContent="ui_VoiceListDG_CopyingRowClipboardContent">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn SortMemberPath="Value.CharacterID" Header="ID" MinWidth="10" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value.CharacterID,StringFormat=D02}" Margin="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn SortMemberPath="Value.Name" Header="Name" MinWidth="100" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value.Name}" Margin="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn SortMemberPath="Value.ReferenceCount" Header="C" Width="30" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value.ReferenceCount}" Margin="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Play" Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Play" Click="Play_Click" Tag="{Binding}" Margin="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn SortMemberPath="Value.Comment" Header="ArcPath" Width="600" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value.Comment}" Margin="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn SortMemberPath="Value.ArcPath" Header="ArcPath" Width="600" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value.ArcPath}" Margin="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>
